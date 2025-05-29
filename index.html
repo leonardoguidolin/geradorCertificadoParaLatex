@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Participantes</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+    button { padding: 10px 20px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+
+<h2>Gerador de Participantes</h2>
+
+<label for="nomes">Cole os nomes (um por linha):</label><br>
+<textarea id="nomes" placeholder="Exemplo: João Silva"></textarea>
+
+<label for="horas">Cole as horas (um por linha):</label><br>
+<textarea id="horas" placeholder="Exemplo: 6"></textarea>
+
+<br><button onclick="gerar()">Gerar Saída</button>
+
+<h3>Resultado:</h3>
+<pre id="resultado"></pre>
+
+<script>
+function gerar() {
+  const nomes = document.getElementById('nomes').value.trim().split('\n');
+  const horas = document.getElementById('horas').value.trim().split('\n');
+  
+  if (nomes.length !== horas.length) {
+    alert("O número de nomes e horas não corresponde!");
+    return;
+  }
+  
+  let resultado = "";
+  for (let i = 0; i < nomes.length; i++) {
+    resultado += `\\part{part}{${nomes[i]}}{Organização Halloween}{${horas[i]}}\n`;
+  }
+  
+  document.getElementById('resultado').textContent = resultado;
+}
+</script>
+
+</body>
+</html>
